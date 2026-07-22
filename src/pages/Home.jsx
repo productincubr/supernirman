@@ -173,15 +173,15 @@ function BuildingIllustration() {
    ────────────────────────────────────────────── */
 function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-navy-900" style={{ minHeight: '560px' }}>
+    <section className="relative overflow-hidden bg-navy-900" style={{ minHeight: 'auto' }}>
       <BuildingIllustration />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 pb-32 pt-16 md:pt-20 lg:pb-36">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pb-16 pt-14 sm:px-6 sm:pb-20 md:pt-20 lg:pb-36">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
           Supernirman Materials Private Limited
         </p>
 
-        <h1 className="mt-4 max-w-2xl text-4xl font-extrabold leading-[1.15] text-white md:text-5xl lg:text-[3.4rem]">
+        <h1 className="mt-4 max-w-2xl text-3xl font-extrabold leading-[1.15] text-white sm:text-4xl md:text-5xl lg:text-[3.4rem]">
           Trusted Industrial,{' '}
           <br className="hidden sm:block" />
           Construction{' '}
@@ -192,22 +192,22 @@ function HeroSection() {
           Partner Across India
         </h1>
 
-        <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-slate-400">
+        <p className="mt-5 max-w-lg text-sm leading-relaxed text-slate-400 sm:text-[15px]">
           Delivering reliable products and procurement
           solutions that build progress and power industries.
         </p>
 
-        <div className="mt-8 flex flex-wrap gap-4">
+        <div className="mt-8 flex flex-col flex-wrap gap-3 sm:flex-row sm:gap-4">
           <Link
             to="/mro"
-            className="inline-flex items-center gap-2 rounded-lg bg-brand px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
+            className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark sm:px-6"
           >
             Explore Solutions
             <ArrowRight />
           </Link>
           <Link
-            to="/contact"
-            className="inline-flex items-center gap-2 rounded-lg border border-white/30 px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-white/60 hover:bg-white/5"
+            to="/"
+            className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/30 px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-white/60 hover:bg-white/5 sm:px-6"
           >
             Talk to an Expert
             <UserIcon />
@@ -269,9 +269,9 @@ function WhatWeDoSection() {
   ];
 
   return (
-    <section className="bg-white pt-28 pb-16">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="grid gap-12 lg:grid-cols-[1fr_2fr]">
+    <section className="bg-white py-16 pt-20 sm:pt-24 lg:pt-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-12">
           {/* Left */}
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">
@@ -291,7 +291,7 @@ function WhatWeDoSection() {
           </div>
 
           {/* Right — 3 cards */}
-          <div className="grid gap-5 sm:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-3">
             {services.map((s) => (
               <div
                 key={s.title}
@@ -332,8 +332,8 @@ function IndustriesSection() {
   ];
 
   return (
-    <section className="bg-navy-900 py-16">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="bg-navy-900 py-14 sm:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="grid items-center gap-10 lg:grid-cols-[1fr_3fr]">
           {/* Left heading */}
           <div>
@@ -348,7 +348,7 @@ function IndustriesSection() {
           </div>
 
           {/* Right icons */}
-          <div className="grid grid-cols-3 gap-6 sm:grid-cols-6">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-6">
             {industries.map((ind) => (
               <div key={ind.label} className="flex flex-col items-center text-center">
                 <div className="flex h-16 w-16 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-slate-300">
@@ -385,9 +385,9 @@ function WhyChooseSection() {
   ];
 
   return (
-    <section className="bg-navy-50 py-16">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="grid gap-12 lg:grid-cols-2">
+    <section className="bg-navy-50 py-14 sm:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="grid gap-10 lg:grid-cols-2">
           {/* Left */}
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">
@@ -410,7 +410,7 @@ function WhyChooseSection() {
           </div>
 
           {/* Right — stat cards */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {stats.map((s) => (
               <div
                 key={s.label}

@@ -10,7 +10,7 @@ export default function SMPLLogo({ variant = 'dark' }) {
       <img
         src="/image/nirmanLogo.png"
         alt="Supernirman Materials Pvt. Ltd."
-        className="block h-auto w-[190px] object-contain sm:w-[220px]"
+        className="block h-auto w-[150px] sm:w-[190px] md:w-[220px] object-contain"
         loading="eager"
       />
     </div>

@@ -1,5 +1,5 @@
-export const Card = ({ children, className = '' }) => (
-  <div className={`rounded-2xl border border-slate-100 bg-white shadow-sm ${className}`}>
+export const Card = ({ children, className = '', ...props }) => (
+  <div {...props} className={`rounded-2xl border border-slate-100 bg-white shadow-sm ${className}`}>
     {children}
   </div>
 );

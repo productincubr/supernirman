@@ -1,5 +1,18 @@
 import { Card, Button } from './UI.jsx';
 
+function renderIcon(Icon, className) {
+  if (typeof Icon === 'string') {
+    return <span className={className}>{Icon}</span>;
+  }
+
+  if (Icon) {
+    const CategoryIcon = Icon;
+    return <CategoryIcon className={className} strokeWidth={1.75} />;
+  }
+
+  return null;
+}
+
 export default function CategoryGrid({
   title,
   subtitle,
@@ -27,35 +40,43 @@ export default function CategoryGrid({
         </div>
 
         <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {categories.map((category) => (
-          <Card
-            key={category.title}
-            className="group relative flex flex-col overflow-hidden border border-white/70 bg-white p-6 shadow-[0_10px_30px_rgba(15,23,42,0.06)] transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(15,23,42,0.12)] motion-safe:hover:scale-[1.01]"
-          >
-            <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand via-brand/70 to-accent opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
+          {categories.map((category) => {
+            const CategoryIcon = category.icon;
 
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand/10 text-3xl ring-1 ring-brand/10 transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110">
-              {category.icon}
-            </div>
+            return (
+              <Card
+                key={category.title}
+                className="flex flex-col rounded-2xl border border-slate-100 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/5">
+                  {renderIcon(CategoryIcon, 'h-6 w-6 text-brand')}
+                </div>
 
-            <h2 className="mt-4 text-lg font-bold leading-snug text-navy-900 transition-colors duration-300 group-hover:text-brand">
-              {category.title}
-            </h2>
+                <h2 className="mt-3 text-lg font-bold text-navy-900">{category.title}</h2>
 
-            <ul className="mt-4 flex-1 space-y-2 text-sm text-slate-600">
-              {category.items.map((item) => (
-                <li key={item} className="flex items-start gap-2.5 transition-transform duration-300 group-hover:translate-x-1">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand transition-all duration-300 group-hover:scale-125 group-hover:bg-accent" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+                <ul className="mt-3 flex-1 space-y-2 text-sm text-slate-600">
+                  {category.items.map((item) => {
+                    if (typeof item === 'string') {
+                      return <li key={item}>{item}</li>;
+                    }
 
-            <Button className="mt-6 self-start bg-brand text-white shadow-lg shadow-brand/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-dark hover:shadow-xl hover:shadow-brand/30">
-              Request Quote
-            </Button>
-          </Card>
-        ))}
+                    const ItemIcon = item.icon;
+
+                    return (
+                      <li key={item.name} className="flex items-center gap-2">
+                        {renderIcon(ItemIcon, 'h-4 w-4 shrink-0 text-brand/70')}
+                        {item.name}
+                      </li>
+                    );
+                  })}
+                </ul>
+
+                <Button className="mt-5 self-start rounded-lg bg-brand px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:opacity-90">
+                  Request Quote
+                </Button>
+              </Card>
+            );
+          })}
         </div>
       </div>
     </section>

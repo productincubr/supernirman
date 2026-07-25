@@ -1,23 +1,155 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SMPLLogo from './Logo.jsx';
 
-const quickLinks = [
-  ['/about', 'About Us'],
-  ['/mro', 'Products'],
-  ['/career', 'Careers'],
-  ['/contact', 'Contact Us'],
-  ['/privacy', 'Privacy Policy'],
-];
-
-const navLinks = [
+const footerNavLinks = [
   ['/', 'Home'],
   ['/mro', 'MRO'],
   ['/government-supply', 'Government Supply'],
   ['/construction-materials', 'Construction Materials'],
   ['/about', 'About Us'],
-  ['/career', 'Career'],
+  // ['/contact', 'Contact Us'],
 ];
+
+/* ──────────────────────────────────────────────
+   BRAND / CLIENT LOGOS DATA
+   ────────────────────────────────────────────── */
+const brandLogos = [
+  { name: 'Gallant',   src: 'https://s3.ap-south-1.amazonaws.com/crefinprod/brand/090ce51cbd_1763441713_Gallant.jpeg' },
+  { name: 'Uniline',   src: 'https://s3.ap-south-1.amazonaws.com/crefinprod/brand/7a2f84f683_1765864071_Uniline.webp' },
+  { name: 'Eastman',   src: 'https://s3.ap-south-1.amazonaws.com/crefinprod/brand/9aa47cc8c9_1768036894_Eastman.png' },
+  { name: 'Accufine',  src: 'https://s3.ap-south-1.amazonaws.com/crefinprod/brand/e156cf0e3b_1772104133_Accufine.jpeg' },
+  { name: 'Atlantis',  src: 'https://s3.ap-south-1.amazonaws.com/crefinprod/brand/a965f57f33_1773037568_Atlantis.jpeg' },
+  { name: 'Oxalis Diagnostics', src: 'https://s3.ap-south-1.amazonaws.com/crefinprod/brand/932ef8cb5d_1773126728_Oxalis_Diagnostics.jpeg' },
+  { name: 'Waig Solar', src: 'https://s3.ap-south-1.amazonaws.com/crefinprod/brand/e25a5c5c29_1773484236_Waig_Solar.jpeg' },
+  { name: 'RR Kabel',  src: 'https://s3.ap-south-1.amazonaws.com/crefinprod/brand/5f51632acf_1773725958_RR_Kabel.png' },
+  { name: 'Oneiric',   src: 'https://s3.ap-south-1.amazonaws.com/crefinprod/brand/036c0b1dcd_1773751464_Oneiric.webp' },
+  { name: 'Amaron',    src: 'https://s3.ap-south-1.amazonaws.com/crefinprod/brand/9db50c722c_1780481603_Amaron.jpeg' },
+];
+
+const badgeColors = [
+  'bg-blue-500/10 text-blue-300',
+  'bg-amber-500/10 text-amber-300',
+  'bg-emerald-500/10 text-emerald-300',
+  'bg-rose-500/10 text-rose-300',
+  'bg-violet-500/10 text-violet-300',
+  'bg-cyan-500/10 text-cyan-300',
+];
+function colorForName(name) {
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  return badgeColors[Math.abs(hash) % badgeColors.length];
+}
+function initialsOf(name) {
+  return name
+    .split(' ')
+    .map((w) => w[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
+}
+
+/* ──────────────────────────────────────────────
+   SINGLE BRAND TILE — dark-theme version
+   (glass card on navy background + graceful fallback)
+   ────────────────────────────────────────────── */
+function BrandLogo({ name, src }) {
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <div className="flex h-16 w-24 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white px-3 shadow-sm shadow-slate-100/80 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:h-20 sm:w-32">
+      {!failed ? (
+        <img
+          src={src}
+          alt={name}
+          title={name}
+          className="max-h-9 max-w-full object-contain opacity-90 sm:max-h-12"
+          loading="eager"
+          decoding="async"
+          onError={() => setFailed(true)}
+        />
+      ) : (
+        <div className="flex flex-col items-center gap-1">
+          <div
+            className={`flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold sm:h-9 sm:w-9 ${colorForName(
+              name
+            )}`}
+          >
+            {initialsOf(name)}
+          </div>
+          <span className="text-[9px] font-medium text-slate-500">{name}</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ──────────────────────────────────────────────
+   BRAND / CLIENT LOGO SCROLLER — smooth rAF marquee
+   ────────────────────────────────────────────── */
+function FooterBrandScroller() {
+  const trackRef = useRef(null);
+  const posRef = useRef(0);
+  const pausedRef = useRef(false);
+
+  // Tripled so the reset point never shows a visible gap
+  const marqueeLogos = [...brandLogos, ...brandLogos, ...brandLogos];
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    let frameId;
+    const speed = 0.5; // px per frame
+
+    const step = () => {
+      if (!pausedRef.current) {
+        const setWidth = track.scrollWidth / 3;
+        posRef.current -= speed;
+        if (setWidth > 0 && Math.abs(posRef.current) >= setWidth) {
+          posRef.current += setWidth;
+        }
+        track.style.transform = `translate3d(${posRef.current}px, 0, 0)`;
+      }
+      frameId = requestAnimationFrame(step);
+    };
+    frameId = requestAnimationFrame(step);
+
+    return () => cancelAnimationFrame(frameId);
+  }, []);
+
+  return (
+    <div className="border-b border-slate-200/80 bg-gradient-to-br from-black via-slate-50 to-slate-100/90 py-8 sm:py-10">
+      <div className="mx-auto max-w-7xl px-6">
+        <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-brand">
+          Trusted Partners
+        </p>
+        <h4 className="mt-2 text-center text-base font-semibold text-slate-800">
+          Brands We Work With
+        </h4>
+      </div>
+
+      <div
+        className="relative mt-6 w-full overflow-hidden"
+        onMouseEnter={() => (pausedRef.current = true)}
+        onMouseLeave={() => (pausedRef.current = false)}
+      >
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white/95 to-transparent sm:w-28" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white/95 to-transparent sm:w-28" />
+
+        <div
+          ref={trackRef}
+          className="flex w-max gap-6 sm:gap-8"
+          style={{ willChange: 'transform' }}
+        >
+          {marqueeLogos.map((brand, i) => (
+            <BrandLogo key={`${brand.name}-${i}`} name={brand.name} src={brand.src} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function SiteFooter() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -35,23 +167,26 @@ export default function SiteFooter() {
   };
 
   return (
-    <footer className="bg-navy-900 text-slate-300">
+    <footer className="relative overflow-hidden bg-slate-200 text-slate-700 shadow-[0_-10px_35px_rgba(15,23,42,0.06)]">
+      <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.7),transparent_45%,rgba(255,255,255,0.35))]" />
+      <FooterBrandScroller />
+
       {/* Main footer grid */}
-      <div className="mx-auto max-w-7xl px-6 pb-10 pt-14">
+      <div className="relative mx-auto max-w-7xl px-6 pb-10 pt-10">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.2fr_1.5fr_1.3fr]">
 
           {/* Column 1 — Logo + Quick Links */}
           <div>
             <SMPLLogo variant="light" />
-            <h4 className="mb-4 mt-8 text-xs font-bold uppercase tracking-[0.2em] text-white">
+            <h4 className="mb-4 mt-8 text-xs font-bold uppercase tracking-[0.2em] text-slate-900">
               Quick Links
             </h4>
             <nav className="flex flex-col gap-2.5">
-              {quickLinks.map(([path, label]) => (
+              {footerNavLinks.map(([path, label]) => (
                 <Link
                   key={path}
                   to={path}
-                  className="w-fit text-sm text-slate-400 transition-colors hover:text-brand"
+                  className="w-fit text-sm font-medium text-slate-600 transition-all duration-300 hover:text-brand"
                 >
                   {label}
                 </Link>
@@ -61,7 +196,7 @@ export default function SiteFooter() {
 
           {/* Column 2 — Contact Information */}
           <div>
-            <h4 className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-white">
+            <h4 className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-slate-900">
               Contact Information
             </h4>
 
@@ -72,7 +207,7 @@ export default function SiteFooter() {
                   <circle cx="12" cy="10" r="3" />
                 </svg>
               </div>
-              <p className="text-sm leading-relaxed text-slate-400">
+              <p className="text-sm leading-relaxed text-slate-600">
                 Supernirman Materials Pvt. Ltd. (Formerly known as Creditopedia Finance Pvt. Ltd.)
                 501, Veritas Business Suites, Sector 53, Gurgaon 122002, Haryana
               </p>
@@ -85,7 +220,7 @@ export default function SiteFooter() {
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                 </svg>
               </div>
-              <a href="mailto:info@crefin.co.in" className="text-sm text-slate-400 transition-colors hover:text-brand">
+              <a href="mailto:info@crefin.co.in" className="text-sm text-slate-600 transition-colors hover:text-brand">
                 info@crefin.co.in
               </a>
             </div>
@@ -96,15 +231,15 @@ export default function SiteFooter() {
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
                 </svg>
               </div>
-              <a href="tel:+919999999999" className="text-sm text-slate-400 transition-colors hover:text-brand">
-                +91 99999 99999
+              <a href="tel:+919910457575" className="text-sm text-slate-600 transition-colors hover:text-brand">
+                +91 99104 57575
               </a>
             </div>
           </div>
 
           {/* Column 3 — Get in Touch form */}
           <div>
-            <h4 className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-white">
+            <h4 className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-slate-900">
               Get in Touch!
             </h4>
 
@@ -121,7 +256,7 @@ export default function SiteFooter() {
                   placeholder="Name"
                   value={form.name}
                   onChange={handleChange}
-                  className="rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-slate-500 outline-none transition-colors focus:border-brand focus:ring-1 focus:ring-brand"
+                  className="rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-700 placeholder-slate-400 outline-none transition-colors focus:border-brand focus:ring-1 focus:ring-brand"
                 />
                 <input
                   type="email"
@@ -129,7 +264,7 @@ export default function SiteFooter() {
                   placeholder="Email"
                   value={form.email}
                   onChange={handleChange}
-                  className="rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-slate-500 outline-none transition-colors focus:border-brand focus:ring-1 focus:ring-brand"
+                  className="rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-700 placeholder-slate-400 outline-none transition-colors focus:border-brand focus:ring-1 focus:ring-brand"
                 />
                 <textarea
                   name="message"
@@ -137,7 +272,7 @@ export default function SiteFooter() {
                   rows="3"
                   value={form.message}
                   onChange={handleChange}
-                  className="resize-none rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-slate-500 outline-none transition-colors focus:border-brand focus:ring-1 focus:ring-brand"
+                  className="resize-none rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-700 placeholder-slate-400 outline-none transition-colors focus:border-brand focus:ring-1 focus:ring-brand"
                 />
                 <button
                   onClick={handleSubmit}
@@ -152,14 +287,14 @@ export default function SiteFooter() {
       </div>
 
       {/* Nav links row */}
-      <div className="border-t border-white/10">
+      <div className="relative border-t border-slate-200/80 bg-white/50 backdrop-blur-sm">
         <div className="mx-auto max-w-7xl px-6 py-5">
           <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-            {navLinks.map(([path, label]) => (
+            {footerNavLinks.map(([path, label]) => (
               <Link
                 key={path}
                 to={path}
-                className="text-sm text-slate-400 transition-colors hover:text-white"
+                className="text-sm font-medium text-slate-500 transition-colors hover:text-brand"
               >
                 {label}
               </Link>
@@ -167,26 +302,6 @@ export default function SiteFooter() {
           </nav>
         </div>
       </div>
-
-      {/* Copyright + WhatsApp */}
-      {/* <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-          {/* <p className="text-sm text-slate-500">
-            © {new Date().getFullYear()} Supernirman Materials Pvt. Ltd. All Rights Reserved.
-          </p> */}
-          {/* <a
-            href="https://wa.me/9199104 57575"
-            target="_blank"
-            rel="noreferrer"
-            className="flex h-11 w-11 items-center justify-center rounded-full bg-green-500 text-white shadow-lg transition-transform hover:scale-110"
-            aria-label="Chat on WhatsApp"
-          >
-            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
-            </svg>
-          </a> */}
-        {/* </div> */}
-      {/* </div> */} 
     </footer>
   );
 }

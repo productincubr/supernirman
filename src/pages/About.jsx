@@ -158,21 +158,21 @@ function PersonCard({ person }) {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="group w-full rounded-3xl border border-slate-200 bg-white p-6 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+        className="group w-full rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
         style={{ borderColor: undefined }}
       >
         <div
-          className="flex h-16 w-16 items-center justify-center rounded-2xl text-xl font-black transition-transform duration-300 group-hover:scale-110"
+          className="flex h-12 w-12 items-center justify-center rounded-xl text-lg font-black transition-transform duration-300 group-hover:scale-110"
           style={{ backgroundColor: `${BRAND}1A`, color: BRAND }}
         >
           {person.initials}
         </div>
 
-        <h3 className="mt-4 text-lg font-bold">{person.name}</h3>
+        <h3 className="mt-3 text-base font-bold">{person.name}</h3>
         <p className="text-sm text-slate-500">{person.role}</p>
 
         <span
-          className="mt-4 inline-flex items-center gap-1 text-sm font-semibold transition-transform duration-300 group-hover:translate-x-1"
+          className="mt-3 inline-flex items-center gap-1 text-xs font-semibold transition-transform duration-300 group-hover:translate-x-1"
           style={{ color: BRAND }}
         >
           Read more →
@@ -226,6 +226,10 @@ export default function About() {
         @keyframes scaleIn {
           from { opacity: 0; transform: scale(0.95) translateY(8px); }
           to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @keyframes zoom-in {
+          from { opacity: 0; transform: scale(0.8); }
+          to { opacity: 1; transform: scale(1); }
         }
       `}</style>
 
@@ -326,30 +330,47 @@ export default function About() {
         </div>
       </section>
 
-      {/* Team */}
-      <section className="bg-slate-50 px-6 py-16">
+      {/* Meet Our Leaders - Complete Section */}
+      <section className="bg-gradient-to-b from-white to-slate-50 px-6 py-16">
         <div className="mx-auto max-w-7xl">
-          <SectionHeading
-            title="Our Team"
-            subtitle="Each member brings a unique flair to this united force, beyond compare. From diverse backgrounds, we have come together to be a force to be reckoned with."
-          />
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {teamMembers.map((person) => (
-              <PersonCard key={person.name} person={person} />
+          {/* Heading */}
+          <div className="mb-12 text-center">
+            <h2 className="text-4xl font-black md:text-5xl">Meet Our Leaders</h2>
+            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">Each member brings a unique flair to this united force, beyond compare. From diverse backgrounds, we have come together to be a force to be reckoned with.</p>
+          </div>
+
+          {/* Large Images */}
+          <div className="mb-10 grid gap-6 md:grid-cols-3">
+            {[
+              { img: 'https://supernirman.com/assets/images/team-1.png', name: 'Viren Jain', delay: '0s' },
+              { img: 'https://supernirman.com/assets/images/team-3.png', name: 'Rohit Kapur', delay: '0.15s' },
+              { img: 'https://supernirman.com/assets/images/team-4.png', name: 'Dhiraj Beri', delay: '0.3s' },
+            ].map((member, idx) => (
+              <div
+                key={idx}
+                className="group mx-auto w-full max-w-xs text-center"
+                style={{
+                  animation: `zoom-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both`,
+                  animationDelay: member.delay,
+                }}
+              >
+                <div className="relative overflow-hidden rounded-2xl shadow-md transition-all duration-500 hover:shadow-xl">
+                  <div className="relative bg-slate-200 pt-[108%]">
+                    <img
+                      src={member.img}
+                      alt={member.name}
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Board of Directors */}
-      <section className="px-6 py-16">
-        <div className="mx-auto max-w-7xl">
-          <SectionHeading
-            title="Board of Directors"
-            subtitle="Introducing our Board of Directors, whose expertise and strategic vision guide our organization towards unparalleled success."
-          />
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {boardOfDirectors.map((person) => (
+          {/* Team Member Cards */}
+          <div className="grid gap-4 md:grid-cols-3">
+            {teamMembers.map((person) => (
               <PersonCard key={person.name} person={person} />
             ))}
           </div>

@@ -8,7 +8,7 @@ const navItems = [
   ['/government-supply', 'Government Supply'],
   ['/construction-materials', 'Construction Materials'],
   ['/about', 'About Us'],
-  ['/career', 'Career'],
+  // ['/career', 'Career'],
   // ['/contact', 'Contact Us'],
 ];
 

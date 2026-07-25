@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 /* ──────────────────────────────────────────────
@@ -63,179 +64,113 @@ const MoreDotsIcon = ({ className = 'w-10 h-10' }) => (
 );
 
 /* ──────────────────────────────────────────────
-   HERO BACKGROUND — Construction Building SVG
+   HERO BACKGROUND — light ambient glow (was dark navy)
    ────────────────────────────────────────────── */
 function BuildingIllustration() {
   return (
     <svg
       viewBox="0 0 700 600"
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute right-0 top-0 h-full w-[65%] object-cover opacity-60"
+      className="absolute right-0 top-0 h-full w-full object-cover opacity-60"
       preserveAspectRatio="xMaxYMid slice"
     >
       <defs>
-        <linearGradient id="fadeLeft" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#0B1A2F" stopOpacity="1" />
-          <stop offset="30%" stopColor="#0B1A2F" stopOpacity="0.7" />
-          <stop offset="100%" stopColor="#0B1A2F" stopOpacity="0" />
-        </linearGradient>
-        <linearGradient id="steelGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#3B6B9F" />
-          <stop offset="100%" stopColor="#1A3D5E" />
-        </linearGradient>
-        <linearGradient id="glassGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#2A5F8F" stopOpacity="0.5" />
-          <stop offset="100%" stopColor="#1A3A5F" stopOpacity="0.3" />
-        </linearGradient>
         <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#0D2240" />
-          <stop offset="50%" stopColor="#0F2D50" />
-          <stop offset="100%" stopColor="#0B1A2F" />
+          <stop offset="0%" stopColor="#EAF2FB" />
+          <stop offset="50%" stopColor="#F3F7FC" />
+          <stop offset="100%" stopColor="#FFFFFF" />
         </linearGradient>
       </defs>
-
-      {/* Sky background */}
       <rect width="700" height="600" fill="url(#skyGrad)" />
-
-      {/* Ambient glow */}
-      <ellipse cx="400" cy="350" rx="250" ry="200" fill="#1A4070" opacity="0.3" />
-      <ellipse cx="500" cy="300" rx="150" ry="120" fill="#2563EB" opacity="0.08" />
-
-      {/* ─── BUILDING 1 (main, center-right) ─── */}
-      {/* Floor beams */}
-      {[120, 190, 260, 330, 400, 470, 540].map((y) => (
-        <rect key={`f1-${y}`} x="250" y={y} width="300" height="4" fill="#2A4A6A" opacity="0.9" />
-      ))}
-      {/* Vertical columns */}
-      {[250, 310, 370, 430, 490, 550].map((x) => (
-        <rect key={`c1-${x}`} x={x} y="120" width="6" height="480" fill="url(#steelGrad)" opacity="0.85" />
-      ))}
-      {/* Glass panels */}
-      {[120, 190, 260, 330, 400, 470].map((y) =>
-        [250, 310, 370, 430, 490].map((x) => (
-          <rect key={`g-${x}-${y}`} x={x + 8} y={y + 6} width={52} height={60} fill="url(#glassGrad)" rx="1" />
-        ))
-      )}
-      {/* Light reflections on glass */}
-      {[200, 270, 340, 410].map((y) =>
-        [260, 380, 500].map((x) => (
-          <rect key={`r-${x}-${y}`} x={x} y={y} width="2" height="40" fill="#5A9AD5" opacity="0.3" />
-        ))
-      )}
-
-      {/* ─── BUILDING 2 (far right, taller) ─── */}
-      {[80, 150, 220, 290, 360, 430, 500, 570].map((y) => (
-        <rect key={`f2-${y}`} x="570" y={y} width="130" height="3" fill="#1E3A5A" opacity="0.7" />
-      ))}
-      {[570, 610, 650, 700].map((x) => (
-        <rect key={`c2-${x}`} x={x} y="80" width="5" height="520" fill="#1E3A5A" opacity="0.6" />
-      ))}
-      {[80, 150, 220, 290, 360, 430, 500].map((y) =>
-        [570, 610, 650].map((x) => (
-          <rect key={`g2-${x}-${y}`} x={x + 6} y={y + 5} width={33} height={60} fill="#1A3050" opacity="0.4" rx="1" />
-        ))
-      )}
-
-      {/* ─── CRANE ─── */}
-      <rect x="300" y="20" width="5" height="110" fill="#3A6A9A" opacity="0.7" />
-      <rect x="250" y="22" width="150" height="3" fill="#3A6A9A" opacity="0.7" />
-      <rect x="305" y="22" width="2" height="0" fill="#3A6A9A" opacity="0" />
-      {/* crane cable */}
-      <line x1="380" y1="25" x2="380" y2="95" stroke="#4A8AC0" strokeWidth="1" opacity="0.5" />
-      <line x1="260" y1="25" x2="300" y2="60" stroke="#4A8AC0" strokeWidth="1" opacity="0.4" />
-      {/* crane hook */}
-      <rect x="376" y="90" width="8" height="12" fill="#4A8AC0" opacity="0.5" rx="1" />
-
-      {/* ─── BUILDING 3 (left, shorter) ─── */}
-      {[300, 370, 440, 510].map((y) => (
-        <rect key={`f3-${y}`} x="150" y={y} width="120" height="3" fill="#1A3050" opacity="0.5" />
-      ))}
-      {[150, 190, 230, 270].map((x) => (
-        <rect key={`c3-${x}`} x={x} y="300" width="4" height="300" fill="#1A3050" opacity="0.5" />
-      ))}
-
-      {/* Ground level */}
-      <rect x="0" y="590" width="700" height="10" fill="#0B1A2F" />
-
-      {/* Warm light spots (windows lit) */}
-      <rect x="320" y="480" width="8" height="12" fill="#D4A843" opacity="0.4" rx="1" />
-      <rect x="440" y="345" width="8" height="12" fill="#D4A843" opacity="0.3" rx="1" />
-      <rect x="500" y="415" width="8" height="12" fill="#D4A843" opacity="0.25" rx="1" />
-
-      {/* Fade overlay from left */}
-      <rect width="700" height="600" fill="url(#fadeLeft)" />
+      <ellipse cx="350" cy="300" rx="350" ry="280" fill="#CFE0F5" opacity="0.35" />
     </svg>
   );
 }
 
 /* ──────────────────────────────────────────────
-   SECTION 1 — HERO
+   HERO RIGHT BANNER — real photo, with light overlay
+   ────────────────────────────────────────────── */
+function HeroBanner() {
+  return (
+    <div className="relative hidden h-full w-full overflow-hidden rounded-3xl lg:block">
+      <img
+        src="https://i.pinimg.com/736x/62/c3/70/62c370ac5f7ea73d294679d7151c18cb.jpg"
+        alt="Industrial construction and supply chain"
+        className="h-full w-full object-cover"
+        loading="eager"
+      />
+      {/* Overlay gradient so it blends with the light hero background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-white/10 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-white/40 via-transparent to-transparent" />
+
+      {/* Floating accent badge */}
+      <div className="absolute bottom-6 right-6 flex items-center gap-3 rounded-2xl bg-white/95 px-5 py-4 shadow-xl backdrop-blur-sm">
+        <div className="flex h-11 w-11 items-center justify-center rounded-full bg-brand/10">
+          <TruckIcon className="h-6 w-6 text-brand" />
+        </div>
+        <div>
+          <div className="text-sm font-bold text-navy-900">On-Time, Every Time</div>
+          <div className="text-xs text-slate-500">Pan-India Logistics</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ──────────────────────────────────────────────
+   SECTION 1 — HERO (lighter palette)
    ────────────────────────────────────────────── */
 function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-navy-900" style={{ minHeight: 'auto' }}>
+    <section className="relative overflow-hidden bg-slate-50" style={{ minHeight: 'auto' }}>
       <BuildingIllustration />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 pb-16 pt-14 sm:px-6 sm:pb-20 md:pt-20 lg:pb-36">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
-          Supernirman Materials Private Limited
-        </p>
+      <div className="relative z-10 mx-auto grid max-w-7xl gap-10 px-4 pb-16 pt-14 sm:px-6 sm:pb-20 md:pt-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-8 lg:pb-24">
+        {/* Left — text */}
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+            Supernirman Materials Private Limited
+          </p>
 
-        <h1 className="mt-4 max-w-2xl text-3xl font-extrabold leading-[1.15] text-white sm:text-4xl md:text-5xl lg:text-[3.4rem]">
-          Trusted Industrial,{' '}
-          <br className="hidden sm:block" />
-          Construction{' '}
-          <span className="text-brand">&amp;</span>
-          <br className="hidden sm:block" />{' '}
-          <span className="text-brand">Government</span> Supply
-          <br className="hidden sm:block" />{' '}
-          Partner Across India
-        </h1>
+          <h1 className="mt-4 max-w-2xl text-3xl font-extrabold leading-[1.15] text-navy-900 sm:text-4xl md:text-5xl lg:text-[3.2rem]">
+            Trusted Industrial,{' '}
+            <br className="hidden sm:block" />
+            Construction{' '}
+            <span className="text-brand">&amp;</span>
+            <br className="hidden sm:block" />{' '}
+            <span className="text-brand">Government</span> Supply
+            <br className="hidden sm:block" />{' '}
+            Partner Across India
+          </h1>
 
-        <p className="mt-5 max-w-lg text-sm leading-relaxed text-slate-400 sm:text-[15px]">
-          Delivering reliable products and procurement
-          solutions that build progress and power industries.
-        </p>
+          <p className="mt-5 max-w-lg text-sm leading-relaxed text-slate-600 sm:text-[15px]">
+            Delivering reliable products and procurement
+            solutions that build progress and power industries.
+          </p>
 
-        <div className="mt-8 flex flex-col flex-wrap gap-3 sm:flex-row sm:gap-4">
-          <Link
-            to="/mro"
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark sm:px-6"
-          >
-            Explore Solutions
-            <ArrowRight />
-          </Link>
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/30 px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-white/60 hover:bg-white/5 sm:px-6"
-          >
-            Talk to an Expert
-            <UserIcon />
-          </Link>
+          <div className="mt-8 flex flex-col flex-wrap gap-3 sm:flex-row sm:gap-4">
+            <Link
+              to="/mro"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark sm:px-6"
+            >
+              Explore Solutions
+              <ArrowRight />
+            </Link>
+            <Link
+              to="/"
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-navy-900/20 px-5 py-3 text-sm font-semibold text-navy-900 transition-colors hover:border-navy-900/40 hover:bg-white sm:px-6"
+            >
+              Talk to an Expert
+              <UserIcon />
+            </Link>
+          </div>
+        </div>
+
+        {/* Right — banner image */}
+        <div className="h-[280px] sm:h-[340px] lg:h-[420px]">
+          <HeroBanner />
         </div>
       </div>
-
-      {/* Stats bar — floating at the bottom edge */}
-      {/* <div className="relative z-10 mx-auto -mb-16 max-w-6xl px-6">
-        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl md:grid-cols-4">
-          {[
-            { icon: <MapPinIcon className="w-6 h-6 text-brand" />, title: 'Pan India', sub: 'Supply Network' },
-            { icon: <ShieldCheckIcon className="w-6 h-6 text-brand" />, title: 'Trusted by', sub: 'Public & Private Sector' },
-            { icon: <AwardIcon className="w-6 h-6 text-brand" />, title: 'Quality Assured', sub: 'Products & Process' },
-            { icon: <TruckIcon className="w-6 h-6 text-brand" />, title: 'Timely Delivery', sub: 'Nationwide' },
-          ].map((item) => (
-            <div key={item.title} className="flex items-center gap-3 px-5 py-5 md:px-6 md:py-6">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand/5">
-                {item.icon}
-              </div>
-              <div>
-                <div className="text-sm font-bold text-navy-900">{item.title}</div>
-                <div className="text-xs text-slate-500">{item.sub}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div> */}
     </section>
   );
 }
@@ -272,7 +207,6 @@ function WhatWeDoSection() {
     <section className="bg-white py-16 pt-20 sm:pt-24 lg:pt-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-12">
-          {/* Left */}
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">
               What We Do
@@ -290,7 +224,6 @@ function WhatWeDoSection() {
             </p>
           </div>
 
-          {/* Right — 3 cards */}
           <div className="grid gap-5 md:grid-cols-3">
             {services.map((s) => (
               <div
@@ -319,7 +252,13 @@ function WhatWeDoSection() {
 }
 
 /* ──────────────────────────────────────────────
-   SECTION 3 — INDUSTRIES WE SERVE
+   SECTION 3 — TRUSTED BRANDS (JS-driven infinite marquee)
+   ────────────────────────────────────────────── */
+
+
+
+/* ──────────────────────────────────────────────
+   SECTION 4 — INDUSTRIES WE SERVE (lighter palette)
    ────────────────────────────────────────────── */
 function IndustriesSection() {
   const industries = [
@@ -332,29 +271,27 @@ function IndustriesSection() {
   ];
 
   return (
-    <section className="bg-navy-900 py-14 sm:py-16">
+    <section className="bg-slate-50 py-14 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="grid items-center gap-10 lg:grid-cols-[1fr_3fr]">
-          {/* Left heading */}
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">
               Industries We Serve
             </p>
-            <h2 className="mt-3 text-2xl font-extrabold leading-tight text-white md:text-3xl">
+            <h2 className="mt-3 text-2xl font-extrabold leading-tight text-navy-900 md:text-3xl">
               Powering Progress
               <br />
               Across Key Sectors
             </h2>
           </div>
 
-          {/* Right icons */}
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-6">
             {industries.map((ind) => (
               <div key={ind.label} className="flex flex-col items-center text-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-slate-300">
+                <div className="flex h-16 w-16 items-center justify-center rounded-xl border border-slate-200 bg-white text-brand shadow-sm">
                   {ind.icon}
                 </div>
-                <p className="mt-3 whitespace-pre-line text-xs font-medium leading-tight text-slate-400">
+                <p className="mt-3 whitespace-pre-line text-xs font-medium leading-tight text-slate-600">
                   {ind.label}
                 </p>
               </div>
@@ -367,7 +304,7 @@ function IndustriesSection() {
 }
 
 /* ──────────────────────────────────────────────
-   SECTION 4 — WHY CHOOSE SUPERNIRMAN
+   SECTION 5 — WHY CHOOSE SUPERNIRMAN
    ────────────────────────────────────────────── */
 function WhyChooseSection() {
   const checklist = [
@@ -388,7 +325,6 @@ function WhyChooseSection() {
     <section className="bg-navy-50 py-14 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="grid gap-10 lg:grid-cols-2">
-          {/* Left */}
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">
               Why Choose Supernirman
@@ -409,7 +345,6 @@ function WhyChooseSection() {
             </ul>
           </div>
 
-          {/* Right — stat cards */}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {stats.map((s) => (
               <div
@@ -439,6 +374,7 @@ export default function Home() {
     <>
       <HeroSection />
       <WhatWeDoSection />
+      {/* <TrustedBrandsSection /> */}
       <IndustriesSection />
       <WhyChooseSection />
     </>

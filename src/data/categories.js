@@ -2,108 +2,207 @@
 // Edit the arrays below to add/remove/rename categories or products —
 // every page (and the search bar) reads from here.
 
+import {
+  Hammer,
+  Wrench,
+  Bolt,
+  Scissors,
+  HardHat,
+  Footprints,
+  Hand,
+  Shirt,
+  Droplet,
+  Beaker,
+  SprayCan,
+  CircleDot,
+  Link2,
+  Link as ChainLink,
+  ShoppingCart,
+  Truck,
+  Construction,
+  Settings,
+  Package,
+  Monitor,
+  Laptop,
+  Cpu,
+  Printer,
+  Cable,
+  BatteryCharging,
+  Home,
+  HeartPulse,
+  Lightbulb,
+  PanelTop,
+  BrickWall,
+  Layers3,
+  Droplets,
+  Pipette,
+  ShowerHead,
+} from 'lucide-react';
+
 export const mroCategories = [
   {
-    icon: '🧰',
+    icon: Wrench,
     title: 'Industrial Tools & Hardware',
-    items: ['Hand Tools', 'Power Tools', 'Fasteners & Fittings', 'Cutting Tools'],
+    items: [
+      { name: 'Hand Tools', icon: Hammer },
+      { name: 'Power Tools', icon: Settings },
+      { name: 'Fasteners & Fittings', icon: Bolt },
+      { name: 'Cutting Tools', icon: Scissors },
+    ],
   },
   {
-    icon: '🦺',
+    icon: HardHat,
     title: 'Safety & PPE',
-    items: ['Safety Helmets', 'Safety Shoes', 'Hand Gloves', 'Reflective Jackets'],
+    items: [
+      { name: 'Safety Helmets', icon: HardHat },
+      { name: 'Safety Shoes', icon: Footprints },
+      { name: 'Hand Gloves', icon: Hand },
+      { name: 'Reflective Jackets', icon: Shirt },
+    ],
   },
   {
-    icon: '🧪',
+    icon: Beaker,
     title: 'Lubricants & Chemicals',
-    items: ['Industrial Lubricants', 'Adhesives & Sealants', 'Cleaning Chemicals'],
+    items: [
+      { name: 'Industrial Lubricants', icon: Droplet },
+      { name: 'Adhesives & Sealants', icon: Beaker },
+      { name: 'Cleaning Chemicals', icon: SprayCan },
+    ],
   },
   {
-    icon: '⚙️',
+    icon: Settings,
     title: 'Bearings & Power Transmission',
-    items: ['Ball Bearings', 'V-Belts', 'Chains & Sprockets'],
+    items: [
+      { name: 'Ball Bearings', icon: CircleDot },
+      { name: 'V-Belts', icon: Link2 },
+      { name: 'Chains & Sprockets', icon: Link2 },
+    ],
   },
   {
-    icon: '🛒',
+    icon: Package,
     title: 'Material Handling',
-    items: ['Trolleys', 'Pallet Trucks', 'Lifting Equipment'],
+    items: [
+      { name: 'Trolleys', icon: ShoppingCart },
+      { name: 'Pallet Trucks', icon: Truck },
+      { name: 'Lifting Equipment', icon: Construction },
+    ],
   },
 ];
 
 export const governmentSupplyCategories = [
   {
-    icon: '💻',
+    icon: Monitor,
     title: 'IT & Office Equipment',
     items: [
-      'Desktop',
-      'Laptop',
-      'All-in-One PC',
-      'Work Station',
-      'Monitor',
-      'Server',
-      'Printer',
-      'BAR Code Printer',
-      'Biometric Systems',
-      'Interactive Panels with CPU',
-      'Professional Large Format Display',
-      'Video Conference & Camera',
+      { name: 'Desktop', icon: Monitor },
+      { name: 'Laptop', icon: Laptop },
+      { name: 'All-in-One PC', icon: Cpu },
+      { name: 'Work Station', icon: PanelTop },
+      { name: 'Monitor', icon: Monitor },
+      { name: 'Server', icon: Cpu },
+      { name: 'Printer', icon: Printer },
+      { name: 'BAR Code Printer', icon: Printer },
+      { name: 'Biometric Systems', icon: HeartPulse },
+      { name: 'Interactive Panels with CPU', icon: PanelTop },
+      { name: 'Professional Large Format Display', icon: Monitor },
+      { name: 'Video Conference & Camera', icon: Monitor },
     ],
   },
   {
-    icon: '⚡',
+    icon: Lightbulb,
     title: 'Electrical & Lighting',
-    items: ['Wire & Cable', 'LED', 'Switch Gear', 'BLDC Fans', 'Air Circulator Fan', 'TPW'],
+    items: [
+      { name: 'Wire & Cable', icon: Cable },
+      { name: 'LED', icon: Lightbulb },
+      { name: 'Switch Gear', icon: PanelTop },
+      { name: 'BLDC Fans', icon: Lightbulb },
+      { name: 'Air Circulator Fan', icon: Lightbulb },
+      { name: 'TPW', icon: PanelTop },
+    ],
   },
   {
-    icon: '🔋',
+    icon: BatteryCharging,
     title: 'Power Backup Solutions',
-    items: ['UPS', 'Automotive Battery', 'Inverter Battery', 'Traction & VRLA Battery'],
+    items: [
+      { name: 'UPS', icon: BatteryCharging },
+      { name: 'Automotive Battery', icon: BatteryCharging },
+      { name: 'Inverter Battery', icon: BatteryCharging },
+      { name: 'Traction & VRLA Battery', icon: BatteryCharging },
+    ],
   },
   {
-    icon: '🏠',
+    icon: Home,
     title: 'Home Appliances',
     items: [
-      'Television (TV)',
-      'AC',
-      'Refrigerator',
-      'Water Dispenser',
-      'Water Cooler',
-      'Washing Machine',
-      'Air Cooler',
+      { name: 'Television (TV)', icon: Monitor },
+      { name: 'AC', icon: Lightbulb },
+      { name: 'Refrigerator', icon: Home },
+      { name: 'Water Dispenser', icon: Droplet },
+      { name: 'Water Cooler', icon: Droplet },
+      { name: 'Washing Machine', icon: Droplets },
+      { name: 'Air Cooler', icon: Lightbulb },
     ],
   },
   {
-    icon: '⚕️',
+    icon: HeartPulse,
     title: 'Medical & Institutional',
-    items: ['Medical Consumables', 'Furniture', 'Paper', 'E-Rickshaw'],
+    items: [
+      { name: 'Medical Consumables', icon: HeartPulse },
+      { name: 'Furniture', icon: Home },
+      { name: 'Paper', icon: Printer },
+      { name: 'E-Rickshaw', icon: BatteryCharging },
+    ],
   },
 ];
 
 export const constructionCategories = [
   {
-    icon: '🏗️',
+    icon: Construction,
     title: 'Cement & Concrete',
-    items: ['OPC Cement', 'PPC Cement', 'Ready Mix Concrete', 'Fly Ash'],
+    items: [
+      { name: 'OPC Cement', icon: Construction },
+      { name: 'PPC Cement', icon: Construction },
+      { name: 'Ready Mix Concrete', icon: Construction },
+      { name: 'Fly Ash', icon: Layers3 },
+    ],
   },
   {
-    icon: '🏢',
+    icon: Layers3,
     title: 'Steel & Structural Materials',
-    items: ['TMT Bars', 'Structural Steel', 'MS Binding Wire', 'Roofing Sheets'],
+    items: [
+      { name: 'TMT Bars', icon: Layers3 },
+      { name: 'Structural Steel', icon: Construction },
+      { name: 'MS Binding Wire', icon: Cable },
+      { name: 'Roofing Sheets', icon: PanelTop },
+    ],
   },
   {
-    icon: '🧱',
+    icon: BrickWall,
     title: 'Bricks, Blocks & Masonry',
-    items: ['AAC Blocks', 'Concrete Blocks', 'Fly Ash Bricks'],
+    items: [
+      { name: 'AAC Blocks', icon: BrickWall },
+      { name: 'Concrete Blocks', icon: BrickWall },
+      { name: 'Fly Ash Bricks', icon: BrickWall },
+    ],
   },
   {
-    icon: '🪣',
+    icon: Droplets,
     title: 'Flooring & Finishing',
-    items: ['Tiles', 'Marble', 'Granite', 'Waterproofing Materials'],
+    items: [
+      { name: 'Tiles', icon: Layers3 },
+      { name: 'Marble', icon: Construction },
+      { name: 'Granite', icon: Construction },
+      { name: 'Waterproofing Materials', icon: Droplets },
+    ],
   },
   {
-    icon: '🚿',
+    icon: Pipette,
     title: 'Plumbing & Sanitary',
-    items: ['CPVC Pipes', 'UPVC Pipes', 'Bathroom Fittings'],
+    items: [
+      { name: 'CPVC Pipes', icon: Pipette },
+      { name: 'UPVC Pipes', icon: Pipette },
+      { name: 'Bathroom Fittings', icon: ShowerHead },
+    ],
   },
 ];
 
@@ -123,7 +222,10 @@ export function searchCatalogs(query) {
   for (const catalog of allCatalogs) {
     for (const category of catalog.categories) {
       const categoryMatches = category.title.toLowerCase().includes(q);
-      const matchedItems = category.items.filter((item) => item.toLowerCase().includes(q));
+      const matchedItems = category.items.filter((item) => {
+        const itemName = typeof item === 'string' ? item : item.name;
+        return itemName.toLowerCase().includes(q);
+      });
 
       if (categoryMatches || matchedItems.length > 0) {
         results.push({

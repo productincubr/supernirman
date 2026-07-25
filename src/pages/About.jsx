@@ -331,51 +331,7 @@ export default function About() {
       </section>
 
       {/* Meet Our Leaders - Complete Section */}
-      <section className="bg-gradient-to-b from-white to-slate-50 px-6 py-16">
-        <div className="mx-auto max-w-7xl">
-          {/* Heading */}
-          <div className="mb-12 text-center">
-            <h2 className="text-4xl font-black md:text-5xl">Meet Our Leaders</h2>
-            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">Each member brings a unique flair to this united force, beyond compare. From diverse backgrounds, we have come together to be a force to be reckoned with.</p>
-          </div>
-
-          {/* Large Images */}
-          <div className="mb-10 grid gap-6 md:grid-cols-3">
-            {[
-              { img: 'https://supernirman.com/assets/images/team-1.png', name: 'Viren Jain', delay: '0s' },
-              { img: 'https://supernirman.com/assets/images/team-3.png', name: 'Rohit Kapur', delay: '0.15s' },
-              { img: 'https://supernirman.com/assets/images/team-4.png', name: 'Dhiraj Beri', delay: '0.3s' },
-            ].map((member, idx) => (
-              <div
-                key={idx}
-                className="group mx-auto w-full max-w-xs text-center"
-                style={{
-                  animation: `zoom-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both`,
-                  animationDelay: member.delay,
-                }}
-              >
-                <div className="relative overflow-hidden rounded-2xl shadow-md transition-all duration-500 hover:shadow-xl">
-                  <div className="relative bg-slate-200 pt-[108%]">
-                    <img
-                      src={member.img}
-                      alt={member.name}
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Team Member Cards */}
-          <div className="grid gap-4 md:grid-cols-3">
-            {teamMembers.map((person) => (
-              <PersonCard key={person.name} person={person} />
-            ))}
-          </div>
-        </div>
-      </section>
+     
     </div>
   );
 }

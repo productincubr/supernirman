@@ -125,7 +125,7 @@ function HeroSection() {
     <section className="relative overflow-hidden bg-slate-50" style={{ minHeight: 'auto' }}>
       <BuildingIllustration />
 
-      <div className="relative z-10 mx-auto grid max-w-7xl gap-10 px-4 pb-16 pt-14 sm:px-6 sm:pb-20 md:pt-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-8 lg:pb-24">
+      <div className="relative z-10 mx-auto grid max-w-7xl gap-10 px-4 pb-8 pt-14 sm:px-6 sm:pb-20 md:pt-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-8 lg:pb-24">
         {/* Left — text */}
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
@@ -167,7 +167,7 @@ function HeroSection() {
         </div>
 
         {/* Right — banner image */}
-        <div className="h-[280px] sm:h-[340px] lg:h-[420px]">
+        <div className="hidden lg:block h-[420px]">
           <HeroBanner />
         </div>
       </div>

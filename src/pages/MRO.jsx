@@ -16,7 +16,7 @@ const exploreCategories = [
     title: "Industrial Tools & Hardware",
     description: "Hand Tools • Power Tools • Cutting Tools",
     image:
-      "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&auto=format&fit=crop&q=80",
+      "https://i.pinimg.com/736x/5e/f0/fe/5ef0feba8ab3a7baaeee195b9dc7843c.jpg",
     icon: Wrench,
   },
   {
@@ -32,7 +32,7 @@ const exploreCategories = [
     title: "Lubricants & Chemicals",
     description: "Greases • Industrial Oils • Cleaning Chemicals",
     image:
-      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&auto=format&fit=crop&q=80",
     icon: Droplets,
   },
   {

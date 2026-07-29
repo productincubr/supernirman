@@ -40,7 +40,7 @@ import {
 
 export const mroCategories = [
   {
-    icon: Settings,
+    icon: '⚡',
     title: "Electrical & Automation",
     items: [
       { name: "Cables & Wires", icon: Cable },
@@ -57,7 +57,7 @@ export const mroCategories = [
   },
 
   {
-    icon: Wrench,
+    icon: '🛠',
     title: "Industrial Tools & Hardware",
     items: [
       { name: "Hand Tools", icon: Hammer },
@@ -73,7 +73,7 @@ export const mroCategories = [
   },
 
   {
-    icon: HardHat,
+    icon: '🦺',
     title: "Safety & PPE",
     items: [
       { name: "Safety Helmets", icon: HardHat },
@@ -87,7 +87,7 @@ export const mroCategories = [
   },
 
   {
-    icon: Construction,
+    icon: '🔥',
     title: "Welding & Fabrication",
     items: [
       { name: "Welding Machines", icon: Construction },
@@ -100,7 +100,7 @@ export const mroCategories = [
   },
 
   {
-    icon: Droplet,
+    icon: '🛢',
     title: "Lubrication & Maintenance",
     items: [
       { name: "Industrial Lubricants", icon: Droplet },
@@ -113,7 +113,7 @@ export const mroCategories = [
   },
 
   {
-    icon: Package,
+    icon: '📦',
     title: "Packaging & Material Handling",
     items: [
       { name: "Packaging Materials", icon: Package },
@@ -125,7 +125,7 @@ export const mroCategories = [
   },
 
   {
-    icon: Settings,
+    icon: '❄️',
     title: "HVAC & Utilities",
     items: [
       { name: "HVAC Systems", icon: Settings },
@@ -138,7 +138,7 @@ export const mroCategories = [
   },
 
   {
-    icon: Truck,
+    icon: '🚚',
     title: "Automotive & Garage",
     items: [
       { name: "Automotive Parts", icon: Truck },

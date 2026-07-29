@@ -56,6 +56,14 @@ const exploreCategories = [
 export default function MRO() {
   return (
     <>
+     {/* Existing Category Grid */}
+      <CategoryGrid
+        title="MRO"
+        eyebrow="Maintenance, Repair & Operations"
+        subtitle="Wide range of Maintenance, Repair & Operations products for every industrial need."
+        categories={mroCategories}
+      />
+      
       {/* Explore Categories */}
       <section className="max-w-7xl mx-auto px-4 lg:px-6 py-12">
         <div className="text-center mb-10">
@@ -115,13 +123,7 @@ export default function MRO() {
         </div>
       </section>
 
-      {/* Existing Category Grid */}
-      <CategoryGrid
-        title="MRO"
-        eyebrow="Maintenance, Repair & Operations"
-        subtitle="Wide range of Maintenance, Repair & Operations products for every industrial need."
-        categories={mroCategories}
-      />
+     
     </>
   );
 }

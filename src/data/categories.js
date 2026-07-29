@@ -3,8 +3,8 @@
 // every page (and the search bar) reads from here.
 
 import {
-  Hammer,
   Wrench,
+  Hammer,
   Bolt,
   Scissors,
   HardHat,
@@ -16,7 +16,6 @@ import {
   SprayCan,
   CircleDot,
   Link2,
-  Link as ChainLink,
   ShoppingCart,
   Truck,
   Construction,
@@ -37,57 +36,120 @@ import {
   Droplets,
   Pipette,
   ShowerHead,
-} from 'lucide-react';
+} from "lucide-react";
 
 export const mroCategories = [
   {
-    icon: Wrench,
-    title: 'Industrial Tools & Hardware',
+    icon: Settings,
+    title: "Electrical & Automation",
     items: [
-      { name: 'Hand Tools', icon: Hammer },
-      { name: 'Power Tools', icon: Settings },
-      { name: 'Fasteners & Fittings', icon: Bolt },
-      { name: 'Cutting Tools', icon: Scissors },
+      { name: "Cables & Wires", icon: Cable },
+      { name: "Switchgear", icon: PanelTop },
+      { name: "Industrial Automation", icon: Cpu },
+      { name: "Electrical Equipment", icon: Settings },
+      { name: "Motors", icon: Settings },
+      { name: "Sensors", icon: Cpu },
+      { name: "Lighting", icon: Lightbulb },
+      { name: "Control Panels", icon: PanelTop },
+      { name: "Battery & UPS", icon: BatteryCharging },
+      { name: "Relays & Contactors", icon: Bolt },
     ],
   },
+
+  {
+    icon: Wrench,
+    title: "Industrial Tools & Hardware",
+    items: [
+      { name: "Hand Tools", icon: Hammer },
+      { name: "Power Tools", icon: Wrench },
+      { name: "Industrial Tools", icon: Wrench },
+      { name: "Fasteners", icon: Bolt },
+      { name: "Hydraulics", icon: Settings },
+      { name: "Pneumatics", icon: Settings },
+      { name: "Pipe & Fittings", icon: Pipette },
+      { name: "Bearings", icon: CircleDot },
+      { name: "Testing Instruments", icon: Cpu },
+    ],
+  },
+
   {
     icon: HardHat,
-    title: 'Safety & PPE',
+    title: "Safety & PPE",
     items: [
-      { name: 'Safety Helmets', icon: HardHat },
-      { name: 'Safety Shoes', icon: Footprints },
-      { name: 'Hand Gloves', icon: Hand },
-      { name: 'Reflective Jackets', icon: Shirt },
+      { name: "Safety Helmets", icon: HardHat },
+      { name: "Safety Gloves", icon: Hand },
+      { name: "Safety Shoes", icon: Footprints },
+      { name: "Face Shields", icon: HardHat },
+      { name: "Protective Clothing", icon: Shirt },
+      { name: "Respiratory Protection", icon: HardHat },
+      { name: "Industrial Safety Equipments", icon: HardHat },
     ],
   },
+
   {
-    icon: Beaker,
-    title: 'Lubricants & Chemicals',
+    icon: Construction,
+    title: "Welding & Fabrication",
     items: [
-      { name: 'Industrial Lubricants', icon: Droplet },
-      { name: 'Adhesives & Sealants', icon: Beaker },
-      { name: 'Cleaning Chemicals', icon: SprayCan },
+      { name: "Welding Machines", icon: Construction },
+      { name: "Electrodes", icon: Bolt },
+      { name: "Cutting Tools", icon: Scissors },
+      { name: "Gas Regulators", icon: Settings },
+      { name: "Fabrication Consumables", icon: Hammer },
+      { name: "Welding Accessories", icon: Construction },
     ],
   },
+
   {
-    icon: Settings,
-    title: 'Bearings & Power Transmission',
+    icon: Droplet,
+    title: "Lubrication & Maintenance",
     items: [
-      { name: 'Ball Bearings', icon: CircleDot },
-      { name: 'V-Belts', icon: Link2 },
-      { name: 'Chains & Sprockets', icon: Link2 },
+      { name: "Industrial Lubricants", icon: Droplet },
+      { name: "Greases", icon: Droplets },
+      { name: "Cleaning Chemicals", icon: SprayCan },
+      { name: "Maintenance Chemicals", icon: Beaker },
+      { name: "Sealants", icon: Beaker },
+      { name: "Corrosion Protection", icon: SprayCan },
     ],
   },
+
   {
     icon: Package,
-    title: 'Material Handling',
+    title: "Packaging & Material Handling",
     items: [
-      { name: 'Trolleys', icon: ShoppingCart },
-      { name: 'Pallet Trucks', icon: Truck },
-      { name: 'Lifting Equipment', icon: Construction },
+      { name: "Packaging Materials", icon: Package },
+      { name: "Pallet Trucks", icon: Truck },
+      { name: "Storage Solutions", icon: Package },
+      { name: "Industrial Trolleys", icon: ShoppingCart },
+      { name: "Warehouse Equipments", icon: Package },
+    ],
+  },
+
+  {
+    icon: Settings,
+    title: "HVAC & Utilities",
+    items: [
+      { name: "HVAC Systems", icon: Settings },
+      { name: "Industrial Fans", icon: Lightbulb },
+      { name: "Air Compressors", icon: Settings },
+      { name: "Water Pumps", icon: Droplets },
+      { name: "Valves", icon: Pipette },
+      { name: "Utility Equipments", icon: Settings },
+    ],
+  },
+
+  {
+    icon: Truck,
+    title: "Automotive & Garage",
+    items: [
+      { name: "Automotive Parts", icon: Truck },
+      { name: "Garage Tools", icon: Wrench },
+      { name: "Industrial Batteries", icon: BatteryCharging },
+      { name: "Tyre Inflators", icon: Settings },
+      { name: "Vehicle Maintenance Consumables", icon: Droplet },
     ],
   },
 ];
+
 
 export const governmentSupplyCategories = [
   {
